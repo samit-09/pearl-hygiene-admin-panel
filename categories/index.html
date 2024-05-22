@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories - Pearl Hygiene</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="../images/pearlhygiene.png" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div id="navbar">
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" id="hamburger-menu-icon" style="margin-right: auto;">
+      <div class="bar active"></div>
+      <div class="bar active"></div>
+      <div class="bar active"></div>
+    </div>
+    <!-- Logo and Title -->
+    <div style="margin-left: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+      <img src="../images/pearlhygiene.png" alt="Pearl Hygiene" width="80px" style="margin: 5px 10px;">
+      <h2>Pearl Hygiene</h2>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar active">
+    <div class="sidebar-header">
+      <img src="../images/admin.png" alt="User Icon" width="40px">
+      <p style="margin: 0 10px;" id="username-text">User Name</p>
+    </div>
+    <ul class="sidebar-menu">
+      <!-- Sidebar Links -->
+    
+      <li><a href="../products/"><i class="fa-solid fa-box-open"></i> Manage Products</a></li>
+      <li><a href="../brands/"><i class="fa-solid fa-dollar-sign"></i> Brands</a></li>
+      <li><a href="../categories/"><i class="fa-solid fa-sliders"></i> Categories</a></li>
+      <li><a href="../featured/"><i class="fa-solid fa-bolt"></i> Featured Products</a></li>
+      <li><a href="../sliders/"><i class="fa-solid fa-image"></i> Slider Products</a></li>
+      <li><a href="../administrator/"><i class="fa-solid fa-user-tie"></i> Administrator</a></li>
+      <li><a href="/" id="sidebar-logout"><i class="fa-solid fa-power-off"></i> Logout</a></li>
+      
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-container">
+    <!-- Loading Spinner -->
+    <div id="loading-container" style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+      <img src="../images/loading_spinner.gif" alt="" width="200px">
+    </div>
+
+    <!-- Categories Form -->
+    <div id="categories_form_container" class="container" style="display: none;">
+      
+      <div style="padding: 10px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <a href="#categories_form" id="add-category-button">Add Category</a>
+        <h1 style="text-align: center;">Categories</h1>
+      </div>
+
+      <div id="categories-data">
+      </div>
+
+      <form id="categories_form" style="display: none;">
+
+        <h1 style="text-align: center;">Add Category</h1>
+        <div class="form-group">
+          <label for="categoryName">Category Name</label>
+          <input type="text" id="categoryName" name="categoryName" required placeholder="Category Name"><br>
+  </div>
+      <br>
+    </form>
+    
+    <div style="display: flex; justify-content: center; align-items: center; margin: 30px;">
+      <button id="addButton">Add</button>
+    </div>
+  </div>
+    
+    </div>
+  </div>
+
+  <!-- Toast Container for Notifications -->
+  <div id="toastContainer"></div>
+
+  <!-- Font Awesome Kit and SweetAlert2 -->
+  <script src="https://kit.fontawesome.com/f275475ac3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- JavaScript Module -->
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearl Hygiene - Products</title>
+
+    <!-- Link to your CSS file for styling -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Link to your favicon -->
+    <link rel="shortcut icon" href="../images/pearlhygiene.png" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div id="navbar">
+        <!-- Hamburger Menu Icon -->
+        <div class="hamburger-menu" id="hamburger-menu-icon" style="margin-right: auto;">
+            <div class="bar active"></div>
+            <div class="bar active"></div>
+            <div class="bar active"></div>
+        </div>
+
+        <!-- Logo and Title -->
+        <div
+            style="margin-left: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+            <img src="../images/pearlhygiene.png" alt="Pearl Hygiene" width="80px" style="margin: 5px 10px;">
+            <h2>Pearl Hygiene</h2>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar active">
+        <div class="sidebar-header">
+            <!-- User Icon and Username -->
+            <img src="../images/admin.png" alt="User Icon" width="40px">
+            <p style="margin: 0 10px;" id="username-text">User Name</p>
+        </div>
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            
+      <li><a href="../products/"><i class="fa-solid fa-box-open"></i> Manage Products</a></li>
+      <li><a href="../brands/"><i class="fa-solid fa-dollar-sign"></i> Brands</a></li>
+      <li><a href="../categories/"><i class="fa-solid fa-sliders"></i> Categories</a></li>
+      <li><a href="../featured/"><i class="fa-solid fa-bolt"></i> Featured Products</a></li>
+      <li><a href="../sliders/"><i class="fa-solid fa-image"></i> Slider Products</a></li>
+      <li><a href="../administrator/"><i class="fa-solid fa-user-tie"></i> Administrator</a></li>
+      <li><a href="/" id="sidebar-logout"><i class="fa-solid fa-power-off"></i> Logout</a></li>
+
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <div id="main-container">
+        <!-- Loading Spinner -->
+        <div id="loading-container" style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+            <img src="../images/loading_spinner.gif" alt="" width="200px">
+        </div>
+
+        <!-- Main product Container -->
+        <div id="main-product-container" class="container" style="display: none;">
+            <!-- Container Top Part -->
+            <div id="container-top-part" style="display: flex; align-items: center; padding: 10px;">
+                <h2 style="margin-right: auto;">MANAGE PRODUCTS</h2>
+                <button id="addProductButton">ADD PRODUCT</button>
+            </div>
+            <hr>
+            <!-- Search Bar and Buttons -->
+            <div style="display: flex; align-items: center; padding: 10px;">
+                <input type="text" id="searchBar" placeholder="Search...">
+                <div id="button-container1">
+                    <button id="searchButton"><img src="../images/searchIcon.png" alt="Search" width="20px"></button>
+                    <button id="resetButton">CLEAR</button>
+                </div>
+            </div>
+            <!-- Additional Buttons -->
+            <div id="button-container2">
+                <button id="deleteSelectedButton">Delete Selected Items</button>
+                <button id="bottomButton">Jump To Bottom</button>
+            </div>
+            <!-- products Table -->
+            <table id="productsTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="selectAll" name="selectAll" value="selectAll">
+                        </th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Code</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- products data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Page Bottom Element -->
+        <div id="pageBottom"></div>
+
+        <!-- Toast Container for Messages -->
+        <div id="toastContainer"></div>
+    </div>
+
+    <!-- Script Imports -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/f275475ac3.js" crossorigin="anonymous"></script>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

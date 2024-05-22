@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pearl Hygiene Admin Panel</title>
+
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Link to the shortcut icon -->
+    <link rel="shortcut icon" href="/images/pearlhygiene.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <!-- Main heading for the admin panel -->
+    <h1 style="text-align: center; color: white;">Pearl Hygiene Admin Panel</h1>
+
+    <!-- Container for the login form -->
+    <div class="container">
+        <!-- Image for the logo -->
+        <h2>Login</h2>
+        <div style="display: flex; justify-content: center; align-items: center;"><img src="images/pearlhygiene.png"
+                alt="product Icon" width="100px"></div>
+        <!-- Login form -->
+        <form id="loginForm">
+            <!-- Username field -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <!-- Password field -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <!-- Login button -->
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Container for displaying toast messages -->
+    <div id="toastContainer"></div>
+
+    <!-- Script tag to link the JavaScript file -->
+    <script src="script.js" type="module"></script>
+
+</body>
+
+</html>

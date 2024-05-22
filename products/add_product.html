@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product - Pearl Hygiene</title>
+
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="add_product_style.css">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../images/pearlhygiene.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <a href="/products/">
+    <div id="navbar">
+      <img src="../images/pearlhygiene.png" alt="Product" width="80px" style="margin: 5px 10px;">
+      <h2>Pearl Hygiene</h2>
+    </div>
+  </a>
+
+  <!-- Loading Spinner Container -->
+  <div id="loading-container" style="display: none; justify-content: center; align-items: center; padding: 20px;">
+    <img src="../images/loading_spinner.gif" alt="" width="200px">
+  </div>
+
+  <!-- Main Container -->
+  <div style="display: flex; justify-content: center; align-items: center;">
+
+    <div id="upload_product_form_container" class="container">
+
+      <form id="upload_product_form">
+
+        <!-- Form Title -->
+        <h2 style="margin-right: auto;">ADD PRODUCT</h2>
+
+        <!-- Product Name Input -->
+        <label for="product_name">Product Name</label>
+        <input type="text" id="product_name" name="product_name" placeholder="Product Name">
+
+        <label for="product_description">Product Description</label>
+        <textarea type="text" id="product_description" name="product_description" placeholder="Product Description"></textarea>
+
+
+          <label for="product_code">Code</label>
+        <input type="text" id="product_code" name="product_code" placeholder="Product Code">
+
+
+        <label for="product_brand">Brand</label>
+        <select id="product_brand" name="product_brand" required></select>
+
+
+        <label for="product_category">Product Category</label>
+        <select id="product_category" name="product_category" required></select>
+
+              <!-- Specifications Input -->
+      <div id="specifications_container">
+        <label for="specification_field">Specification Field</label>
+        <input type="text" id="specification_field" name="specification_field" placeholder="Ex: Voltage">
+        <label for="specification_value">Specification Value</label>
+        <input type="text" id="specification_value" name="specification_value" placeholder="Ex: 220-240 V">
+        <button type="button" id="add_specification"><i class="fa-solid fa-plus"></i></button>
+      </div>
+
+      <!-- Display added specifications -->
+      <h2 style="margin: 5px;">Specifications</h2>
+      <div id="added_specifications">
+      </div>
+
+        <div id="imgPreviewDiv">
+        </div>
+
+        <!-- Drag and Drop Area for Image Upload -->
+        <div id="dropArea">
+          <div class="custom-file-upload">
+            <label for="fileInput">
+              <p style="color: black;">Drag and drop product images here or click to select images</p>
+              <img src="../images/upload.png" alt="Upload Icon" width="200px" id="imgPreview"
+                style="border-radius: 5px;">
+            </label>
+            <input type="file" id="fileInput" accept="image/png, image/jpeg" style="display: none;" multiple>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Upload Button -->
+      <div style="display: flex; justify-content: center; align-items: center; margin: 30px;">
+        <button id="uploadButton">Upload</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Toast Container for Notifications -->
+  <div id="toastContainer"></div>
+
+  <!-- External Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/f275475ac3.js" crossorigin="anonymous"></script>
+  <script type="module" src="add_product_script.js"></script>
+
+</body>
+
+</html>

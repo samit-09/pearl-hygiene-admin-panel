@@ -1,0 +1,95 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* Apply Poppins font to all elements */
+* {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+/* Set background color for the body */
+body {
+    background: #581412;
+}
+
+/* Style container */
+.container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px 40px 20px 25px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style heading */
+h2 {
+    text-align: center;
+}
+
+/* Style form groups */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Style labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style input fields */
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style buttons */
+button {
+    width: 100px;
+    padding: 10px;
+    background-color: #581412;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Change button color on hover */
+button:hover {
+    background-color: #490f0d;
+}
+
+/* Toast container styles */
+#toastContainer {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #490f0d;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 899px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        max-width: 75%;
+        margin: 100px auto;
+        padding: 20px 40px 20px 25px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+}

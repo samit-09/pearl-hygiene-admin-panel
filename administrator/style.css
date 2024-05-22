@@ -1,0 +1,136 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* Apply Poppins font family to all elements */
+* {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+/* Reset default padding and margin for the body */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Navbar styling */
+#navbar {
+    background: #fafafa;
+    color: #5b1616;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Input field styling */
+input[type="text"],
+input[type="password"],
+input[type="email"]
+ {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 18px 0;
+}
+
+/* Button styling */
+button {
+    width: 100px;
+    padding: 10px;
+    background-color: #490f0d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 50px 0;
+}
+
+#users-button{
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 20px;
+    transition: .2s;
+}
+
+#users-button:hover{
+    transform: scale(1.15)
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #541715;
+}
+
+/* Main container styling */
+.container {
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+}
+
+/* Label styling inside the form */
+#addUserForm label {
+    color: #541715;
+    margin: 0 5px;
+}
+
+/* Input field styling inside the form */
+#addUserForm input {
+    display: block;
+    margin: 15px 0;
+    background: transparent;
+    border-radius: 5px;
+    padding: 6px;
+    width: 80%;
+    font-size: 18px;
+    outline: none;
+}
+
+/* Input field focus styling */
+#addUserForm input:focus {
+    background: rgb(243, 243, 243);
+}
+
+/* Styles for the users button */
+#users-button {
+    margin: 10px;
+}
+
+/* Media query for responsive design */
+@media only screen and (max-width: 999px) {
+
+    /* Adjust container width and padding for smaller screens */
+    .container {
+        width: 100%;
+        margin: 20px;
+        padding: 15px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+    }
+}
+
+/* Toast notification styling */
+#toastContainer {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #541715;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+}

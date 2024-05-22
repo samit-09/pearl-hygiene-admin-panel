@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <link rel="shortcut icon" href="../../images/pearlhygiene.png" type="image/x-icon">
+
+    <!-- Internal CSS Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        /* Global Styles */
+        * {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Navbar Styles */
+        #navbar {
+            background: #fafafa;
+            color: #5b1616;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* User Item Styles */
+        .user-item {
+            background: #490f0d;
+            padding: 20px 40px;
+            color: white;
+            border-radius: 20px;
+            margin: 10px;
+        }
+
+        /* User List Styles */
+        #userList {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px 10px 50px 10px;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 80%;
+            margin: 100px auto;
+            padding: 20px 40px 20px 25px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* User Data Button Styles */
+        .user-data-button {
+            background: transparent;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        /* User Data Button Hover Styles */
+        .user-data-button:hover {
+            background: rgba(230, 230, 230, 0.489);
+        }
+
+        /* Media Queries */
+        @media only screen and (min-width: 1000px) {
+            #userList {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media only screen and (max-width: 999px) {
+            #userList {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        /* Toast Container Styles */
+        #toastContainer {
+            display: none;
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #490f0d;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            z-index: 1000;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <a href="/products">
+        <div id="navbar">
+            <img src="../../images/pearlhygiene.png" alt="Product" width="80px" style="margin: 5px 10px;">
+            <h2>Pearl Hygiene</h2>
+        </div>
+    </a>
+
+    <h1 style="text-align: center;">Users</h1>
+
+    <!-- Loading Spinner Container -->
+    <div id="loading-container" style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+        <img src="../../images/loading_spinner.gif" alt="" width="200px">
+    </div>
+
+    <!-- User List Container -->
+    <div id="userList"></div>
+
+    <!-- Toast Container for Notifications -->
+    <div id="toastContainer"></div>
+
+    <!-- External JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Main JavaScript File -->
+    <script type="module" src="users_script.js"></script>
+</body>
+
+</html>

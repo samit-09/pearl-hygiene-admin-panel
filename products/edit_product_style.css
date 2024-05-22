@@ -1,0 +1,376 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* Apply Poppins font family to all elements */
+* {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+/* Reset default padding and margin for the body */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/* Styling for the navigation bar */
+#navbar {
+    background: #fafafa;
+    color: #5b1616;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+}
+
+a{
+    text-decoration: none;
+}
+
+/* Styling for the main container */
+.container {
+    width: 100%;
+    margin: 20px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+}
+
+/* Styling for input fields */
+#edit_product_form input {
+    display: block;
+    margin: 15px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid rgb(177, 177, 177);
+    border-radius: 2px;
+    padding: 6px;
+    width: 80%;
+    color: black;
+    outline: none;
+    font-size: 18px;
+}
+
+/* Styling for input fields when focused */
+#edit_product_form input:focus {
+    background: rgb(243, 243, 243);
+}
+
+#edit_product_form textarea{
+    display: block;
+    margin: 15px 0;
+    background: transparent;
+    border: 0;
+    border: 2px solid rgb(177, 177, 177);
+    border-radius: 2px;
+    padding: 9px;
+    width: 80%;
+    color: black;
+    outline: none;
+    font-size: 18px;
+    resize: none;
+    height: 150px;
+}
+
+
+#edit_product_form textarea:focus {
+    background: rgb(243, 243, 243);
+}
+
+/* Styling for select dropdowns */
+#edit_product_form select {
+    display: block;
+    margin: 15px 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid rgb(177, 177, 177);
+    border-radius: 2px;
+    padding: 6px;
+    width: 80%;
+    color: black;
+    outline: none;
+    font-size: 18px;
+}
+
+
+#specifications_container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 40px 0;
+}
+
+#specifications_container input{
+    width: 200px;
+    border: 2px solid #561c1c;
+    margin: 15px;
+    font-size: 14px;
+}
+
+.spec-item{
+    color: #561c1c;
+    font-size: 18px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.spec-item p{
+    margin-right: 10px;
+}
+
+.spec-item button{
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: .2s;
+}
+
+.spec-item button:hover{
+    background: rgb(236, 236, 236);
+}
+
+.spec-item button img{
+    width: 20px;
+}
+
+.spec-item span{
+    color: rgb(0, 75, 187);
+}
+
+#add_specification{
+    border-radius: 50%;
+    padding: 10px;
+    padding: 10px 16px;
+    color: white;
+    background: #570e0e;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid rgb(255, 183, 183);
+}
+
+#added_specifications{
+    margin: 20px 5px;
+}
+
+/* Styling for the file upload area */
+#dropArea {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Highlight effect for file upload area */
+.highlight {
+    background-color: #f0f0f0;
+}
+
+/* Styling for uploaded image */
+#dropArea img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Hide the file input element */
+#fileInput {
+    display: none;
+}
+
+/* Styling for the upload button */
+#uploadButton {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #490f0d;
+    color: white;
+    font-size: 18px;
+    border-radius: 50px;
+    outline: none;
+    border: 2px solid #490f0d;
+    cursor: pointer;
+}
+
+/* Styling for the upload button when active */
+#uploadButton:active {
+    background: #490f0d;
+}
+
+/* Styling for the upload button when hovered */
+#uploadButton:hover {
+    background: #490f0d;
+}
+
+/* Styling for labels */
+#edit_product_form label {
+    color: #581412;
+    margin: 0 5px;
+}
+
+#dashboardLink {
+
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #490f0d;
+    color: white;
+    font-size: 18px;
+    border-radius: 50px;
+    outline: none;
+    border: 2px solid #581412;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+
+#dashboardLink:active {
+    background: #ff2020;
+}
+
+#dashboardLink:hover {
+    background: #581412;
+}
+
+/* Styling for toast messages */
+#toastContainer {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #581412;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+}
+
+
+#imgPreviewDiv{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.image-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image-item img{
+    width: 300px;
+    border-radius: 5px;
+}
+
+.image-item button img{
+    width: 20px;
+}
+.image-item div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imgPreviewDiv div label{
+    margin-right: 15px;
+}
+
+#imgPreviewDiv div input{
+    width: 30px;
+    scale: 1.5;
+    cursor: pointer;
+}
+
+.image-data-button {
+
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(128, 128, 128, 0.121);
+    transition: .2s;
+}
+
+
+.image-data-button:hover {
+
+    background: rgba(215, 215, 215, 0.836);
+
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 899px) {
+    .container {
+        width: 100%;
+        margin: 20px;
+        padding: 15px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+    }
+
+    /* Adjust font size for smaller screens */
+    #edit_product_form h2 {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    /* Adjust size of uploaded image for smaller screens */
+    #imgPreview {
+        max-width: 50%;
+        max-height: 100%;
+    }
+
+    /* Adjust font size for input fields and select dropdowns */
+    #edit_product_form input,
+    #edit_product_form select {
+        font-size: 14px;
+    }
+
+    /* Adjust font size for dashboard link */
+    #dashboardLink {
+        font-size: 12px;
+    }
+
+    /* Adjust font size for upload button */
+    #uploadButton {
+        font-size: 10px;
+    }
+}
+
+@media only screen and (max-width: 698px) {
+    #imgPreviewDiv{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    
+    #specifications_container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+}
+
+@media only screen and (min-width: 699px) {
+    #imgPreviewDiv{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 999px) {
+    #imgPreviewDiv{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brands - Pearl Hygiene</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="../images/pearlhygiene.png" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div id="navbar">
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu" id="hamburger-menu-icon" style="margin-right: auto;">
+      <div class="bar active"></div>
+      <div class="bar active"></div>
+      <div class="bar active"></div>
+    </div>
+    <!-- Logo and Title -->
+    <div style="margin-left: auto; display: flex; justify-content: center; align-items: center; margin-right: 15px;">
+      <img src="../images/pearlhygiene.png" alt="Pearl Hygiene" width="80px" style="margin: 5px 10px;">
+      <h2>Pearl Hygiene</h2>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar active">
+    <div class="sidebar-header">
+      <img src="../images/admin.png" alt="User Icon" width="40px">
+      <p style="margin: 0 10px;" id="username-text">User Name</p>
+    </div>
+    <ul class="sidebar-menu">
+      <!-- Sidebar Links -->
+    
+      <li><a href="../products/"><i class="fa-solid fa-box-open"></i> Manage Products</a></li>
+      <li><a href="../brands/"><i class="fa-solid fa-dollar-sign"></i> Brands</a></li>
+      <li><a href="../categories/"><i class="fa-solid fa-sliders"></i> Categories</a></li>
+      <li><a href="../featured/"><i class="fa-solid fa-bolt"></i> Featured Products</a></li>
+      <li><a href="../sliders/"><i class="fa-solid fa-image"></i> Slider Products</a></li>
+      <li><a href="../administrator/"><i class="fa-solid fa-user-tie"></i> Administrator</a></li>
+      <li><a href="/" id="sidebar-logout"><i class="fa-solid fa-power-off"></i> Logout</a></li>
+      
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-container">
+    <!-- Loading Spinner -->
+    <div id="loading-container" style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+      <img src="../images/loading_spinner.gif" alt="" width="200px">
+    </div>
+
+    <!-- Brands Form -->
+    <div id="brands_form_container" class="container" style="display: none;">
+      
+      <div style="padding: 10px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <a href="#brands_form" id="add-brand-button">Add Brand</a>
+        <h1 style="text-align: center;">Brands</h1>
+      </div>
+
+      <div id="brands-data">
+      </div>
+
+      <form id="brands_form" style="display: none;">
+
+        <h1 style="text-align: center;">Add Brand</h1>
+        <div class="form-group">
+          <label for="brandName">Brand Name</label>
+          <input type="text" id="brandName" name="brandName" required placeholder="Brand Name"><br>
+  </div>
+
+  <div class="form-group">
+      <label for="image">Brand Image</label>
+      <div id="dropArea">
+        <div class="custom-file-upload">
+          <label for="fileInput">
+            <p style="color: black;">Drag and drop an image here, or click to select an image</p>
+            <img src="../images/upload.png" alt="Upload Icon" width="200px" id="imgPreview"
+              style="border-radius: 5px;">
+          </label>
+          <input type="file" id="fileInput" accept="image/png, image/jpeg" style="display: none;">
+        </div>
+      </div>
+
+      <br>
+  </div>
+      </form>
+
+      <div style="display: flex; justify-content: center; align-items: center; margin: 30px;">
+        <button id="addButton">Add</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Container for Notifications -->
+  <div id="toastContainer"></div>
+
+  <!-- Font Awesome Kit and SweetAlert2 -->
+  <script src="https://kit.fontawesome.com/f275475ac3.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- JavaScript Module -->
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
