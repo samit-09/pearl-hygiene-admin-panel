@@ -34,7 +34,7 @@ document.getElementById("loading-container").style.display = "none";
 
 const slidersRef = ref(database, 'sliders');
 
-let sliderTitle = "", sliderSubtitle = "", image_url = "";
+let sliderTitle = "", sliderSubtitle = "", image_url = "", productId = 1;
 
 function displaySliders() {
 
@@ -304,7 +304,7 @@ function uploadImage(files) {
                 .then(url => {
                     // On successful upload to ImgBB, upload image URL to database
                     image_url = url;
-                    uploadToDatabase(sliderTitle, sliderSubtitle, image_url);
+                    uploadToDatabase(sliderTitle, sliderSubtitle, productId, image_url);
                 })
                 .catch(error => {
                     // Show error message if failed to upload image to ImgBB
@@ -381,6 +381,7 @@ addButton.addEventListener('click', function () {
 
     sliderTitle = document.getElementById("title").value.trim();
     sliderSubtitle = document.getElementById("subtitle").value.trim();
+    productId = document.getElementById("id").value.trim();
     uploadImage(fileInput.files);
 
     addButton.style.display = "none";
@@ -390,13 +391,14 @@ addButton.addEventListener('click', function () {
 
 
 
-function uploadToDatabase(title, subtitle, image) {
+function uploadToDatabase(title, subtitle, productId, image) {
 
     const newSliderRef = ref(database, 'sliders/');
 
     push(newSliderRef, {
         title: title,
         subtitle: subtitle,
+        id: productId,
         image: image
     })
         .then(() => {
