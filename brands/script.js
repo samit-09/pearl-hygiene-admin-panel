@@ -34,7 +34,7 @@ document.getElementById("loading-container").style.display = "none";
 
 const brandsRef = ref(database, 'brands');
 
-let brandName = "", image_url = "";
+let brandName = "", image_url = "", brandDetails = "", brandUrl = "";
 
 function displaybrands() {
 
@@ -53,6 +53,8 @@ function displaybrands() {
                 row.innerHTML = `
                 <img class="img-table" src="${brandData.image}" alt="brand - ${brandData.image}">
                 <h3>${brandId}</h3>
+                <h4>Website - <b>${brandData.url}</b></h4>
+                <p>Details - <i>${brandData.details}</i></p>
                     
                     <button class="image-data-button" id="delete-button-${brandId}"><img src="../images/deleteIcon.png" alt="Delete Icon" width="30px" title="Delete"></button>
 
@@ -303,7 +305,7 @@ function uploadImage(files) {
                 .then(url => {
                     // On successful upload to ImgBB, upload image URL to database
                     image_url = url;
-                    uploadToDatabase(brandName, image_url);
+                    uploadToDatabase(brandName, brandUrl, brandDetails, image_url);
                 })
                 .catch(error => {
                     // Show error message if failed to upload image to ImgBB
@@ -379,6 +381,8 @@ fileInput.addEventListener('change', function () {
 addButton.addEventListener('click', function () {
 
     brandName = document.getElementById("brandName").value.trim();
+    brandDetails = document.getElementById("brandDetails").value.trim();
+    brandUrl = document.getElementById("url").value.trim();
     uploadImage(fileInput.files);
 
     addButton.style.display = "none";
@@ -388,11 +392,13 @@ addButton.addEventListener('click', function () {
 
 
 
-function uploadToDatabase(name, url) {
+function uploadToDatabase(name, website, details, url) {
 
     const newBrandRef = ref(database, 'brands/' + name);
 
     set(newBrandRef, {
+        details: details,
+        url: website,
         image: url
     })
         .then(() => {
