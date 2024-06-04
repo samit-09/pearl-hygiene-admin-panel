@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Categories - Pearl Hygiene</title>
+  <title>Sub Categories - Pearl Hygiene</title>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="../images/pearlhygiene.png" type="image/x-icon">
 </head>
@@ -58,8 +58,8 @@
     <div id="categories_form_container" class="container" style="display: none;">
       
       <div style="padding: 10px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-        <a href="#categories_form" id="add-category-button">Add Category</a>
-        <h1 style="text-align: center;">Categories</h1>
+        <a href="#categories_form" id="add-sub-category-button">Add Sub Category</a>
+        <h1 style="text-align: center;">Sub-Categories</h1>
       </div>
 
       <div id="categories-data">
@@ -67,10 +67,14 @@
 
       <form id="categories_form" style="display: none;">
 
-        <h1 style="text-align: center;">Add Category</h1>
+        <h1 style="text-align: center;">Add Sub Category</h1>
+
+        <label for="product_category">Product Category</label>
+        <select id="product_category" name="product_category" required></select>
+
         <div class="form-group">
-          <label for="categoryName">Category Name</label>
-          <input type="text" id="categoryName" name="categoryName" required placeholder="Category Name"><br>
+          <label for="subCategoryName">Sub Category Name</label>
+          <input type="text" id="subCategoryName" name="subCategoryName" required placeholder="Sub Category"><br>
   </div>
       <br>
     </form>

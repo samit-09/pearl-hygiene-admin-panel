@@ -12,11 +12,14 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 // Initialize variables to store product data
-let productName, productDescription, productCode, productBrand, productCategory, image_urls, specifications = [];
+let productName, productDescription, productCode, productBrand, productCategory, productSubCategory, image_urls, specifications = [];
+
+let selectedCategory = productCategory;
 
 // Get references to form inputs and image preview element
 const productNameInput = document.getElementById("product_name"),
 productCategoryInput = document.getElementById("product_category"),
+productSubCategoryInput = document.getElementById("sub_category"),
 productBrandInput = document.getElementById("product_brand"),
 productCodeInput = document.getElementById("product_code"),
 productDescriptionInput = document.getElementById("product_description"),
@@ -90,42 +93,94 @@ function getBrandsFromFirebase() {
       }
     }); 
   }
+
+
   function getCategoriesFromFirebase() {
     // Reference to the brand data in Firebase RTDB
     const categoriesRef = ref(database, 'categories');
 
     get(categoriesRef).then((snapshot) => {
-      const categoriesData = snapshot.val();
-    
-      // Check if there are brands in the database
-      if (categoriesData) {
-        // Get a reference to the select element
-        const selectElement = document.getElementById('product_category');
-    
-        // Loop through the brands object and create option elements
-        Object.keys(categoriesData).forEach((categoryKey) => {
-            const categoryName = categoriesData[categoryKey]; // Get the brand name (key)
-            const option = document.createElement('option'); // Create an option element
-            option.value = categoryName; // Set the value of the option
-            option.textContent = categoryName; // Set the text content of the option
-            selectElement.appendChild(option); // Append the option to the select element
-          });
 
-          const defaultOption = document.createElement('option'); // Create an option element
-          defaultOption.value = "None"; // Set the value of the option
-          defaultOption.textContent = "None"; // Set the text content of the option
-          selectElement.appendChild(defaultOption);
+        const categoriesData = snapshot.val();
 
-      }
-    }); 
-  }
+        // Check if there are brands in the database
+        if (categoriesData) {
+            // Get a reference to the select element
+            const selectElement = document.getElementById('product_category');
+            const subCategorySelectElement = document.getElementById('sub_category');
+
+            for (const categoryId in categoriesData) {
+
+                const categoryData = categoriesData[categoryId];
+
+                if (categoryData.subCategories) {
+
+                    const option = document.createElement('option');
+                    option.value = categoryData.name;
+                    option.textContent = categoryData.name;
+                    selectElement.appendChild(option);
+
+                } else {
+
+                    const categoryName = categoriesData[categoryId];
+                    const option = document.createElement('option');
+                    option.value = categoryName;
+                    option.textContent = categoryName;
+                    selectElement.appendChild(option);
+
+                }
+            }
+
+            
+            selectElement.addEventListener('change', (e) => {
+                subCategorySelectElement.innerHTML = ''; // Clear existing options
+
+                const selectedCategoryName = e.target.value; // Get the selected category name
+
+                // Find the category object using the name
+
+                for (const categoryId in categoriesData) {
+                    if (categoriesData[categoryId].name === selectedCategoryName) {
+                        selectedCategory = categoriesData[categoryId];
+                        break; // Exit the loop once found
+                    }
+                }
+
+                if (selectedCategory && selectedCategory.subCategories) {
+                    for (const subCategoryId in selectedCategory.subCategories) {
+                        const subOption = document.createElement('option');
+                        subOption.value = selectedCategory.subCategories[subCategoryId]; // Assuming subCategory IDs are relevant
+                        subOption.textContent = selectedCategory.subCategories[subCategoryId];
+                        subCategorySelectElement.appendChild(subOption);
+                    }
+                }
+
+                  // Add a default option for subcategories if no subcategories exist
+                  const noSubCategoryOption = document.createElement('option');
+                  noSubCategoryOption.value = "";
+                  noSubCategoryOption.textContent = "None";
+                  subCategorySelectElement.appendChild(noSubCategoryOption);
+
+            });
+
+            const defaultOption = document.createElement('option'); // Create an option element
+            defaultOption.value = ""; // Set the value of the option
+            defaultOption.textContent = "None"; // Set the text content of the option
+            defaultOption.selected = true;  
+            selectElement.appendChild(defaultOption);
+
+
+
+        }
+    });
+}
 
 
   getBrandsFromFirebase();
-  getCategoriesFromFirebase();
 
 
   function displaySpecifications() {
+
     const addedSpecificationsDiv = document.getElementById('added_specifications');
 
     addedSpecificationsDiv.innerHTML = '';
@@ -143,6 +198,7 @@ function getBrandsFromFirebase() {
       addedSpecificationsDiv.appendChild(specElement);
       attachDynamicEventListener(specifications.indexOf(spec));
     });
+
 
   }
 
@@ -341,9 +397,12 @@ function getProductById(productId) {
                 productDescription = product["productDescription"];
                 productBrand = product["productBrand"];
                 productCategory = product["productCategory"];
+                productSubCategory = product["productSubCategory"];
                 productCode = product["productCode"];
                 image_urls = product["images"];
                 specifications = product["specifications"];
+
+                selectedCategory = product["productCategory"];
 
                 displaySpecifications();
                 displayImages();
@@ -356,7 +415,9 @@ function getProductById(productId) {
                 productBrandInput.value = productBrand;
                 productDescriptionInput.value = productDescription;
                 productCategoryInput.value = productCategory;
+                productSubCategoryInput.value = productSubCategory;
                 productCodeInput.value = productCode;
+
                 // Show form container and hide loading spinner
                 document.getElementById("upload_product_form_container").style.display = "block"
                 document.getElementById("loading-container").style.display = "none"
@@ -373,7 +434,9 @@ function getProductById(productId) {
 }
 
 // Fetch product data by ID
+getCategoriesFromFirebase();
 getProductById(productId);
+
 
 // Function to update product data
 function updateProductData(productId, newData) {
@@ -405,6 +468,7 @@ doneButton.addEventListener("click", function () {
     // Get updated product data from form inputs
     const newProductName = productNameInput.value;
     const new_product_category = productCategoryInput.value;
+    const new_product_sub_category = productSubCategoryInput.value;
     const new_product_code = productCodeInput.value;
     const newProductBrand = productBrandInput.value;
     const new_product_description = productDescriptionInput.value;
@@ -416,6 +480,7 @@ doneButton.addEventListener("click", function () {
         productName: newProductName,
         productBrand: newProductBrand,
         productCategory: new_product_category,
+        productSubCategory: new_product_sub_category,
         productCode: new_product_code,
         productDescription: new_product_description,
         specifications: new_specifications,
