@@ -51,12 +51,23 @@ function displaycategories() {
                 row.classList.add("category-item");
 
                 // Populate the row with product data
-                row.innerHTML = `
-                <h3>${categoryData}</h3>
-                    
-                    <button class="image-data-button" id="delete-button-${categoryId}"><img src="../images/deleteIcon.png" alt="Delete Icon" width="30px" title="Delete"></button>
 
-                `;
+                if (categoryData.name) {
+                    row.innerHTML = `
+                    <h3>${categoryData.name}</h3>
+                        
+                        <button class="image-data-button" id="delete-button-${categoryId}"><img src="../images/deleteIcon.png" alt="Delete Icon" width="30px" title="Delete"></button>
+    
+                    `;
+                }else{
+                    row.innerHTML = `
+                    <h3>${categoryData}</h3>
+                        
+                        <button class="image-data-button" id="delete-button-${categoryId}"><img src="../images/deleteIcon.png" alt="Delete Icon" width="30px" title="Delete"></button>
+    
+                    `;
+                }
+
 
                 document.getElementById("categories-data").appendChild(row);
 
