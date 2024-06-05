@@ -293,7 +293,20 @@ function uploadToDatabase(categoryName) {
     get(categoriesRef)
         .then((snapshot) => {
             const categoriesData = snapshot.val();
+
+            const catLength = Object.keys(categoriesData).length;
+
             let nextIndex = 0;
+
+            if (catLength == 0) {
+                
+                nextIndex = 0;
+
+            }else{
+
+                nextIndex = parseInt(Object.keys(categoriesData)[catLength - 1]) + 1;
+                
+            }
 
             if (categoriesData) {
                 // Get the highest index and increment by 1 for the new category

@@ -46,7 +46,7 @@ function displaycategories() {
             for (const categoryId in categoriesData) {
                 const categoryData = categoriesData[categoryId];
                 
-                if (categoryData.subCategories) {
+                if (categoryData.name) {
                     const option = document.createElement('option');
                     option.value = categoryData.name;
                     option.textContent = categoryData.name;
@@ -404,7 +404,14 @@ function uploadToDatabase(subCategoryName, categoryName) {
                     const subCategories = categoriesData[categoryKey].subCategories || {};
                     const subCatLength = Object.keys(subCategories).length;
 
-                    const nextSubCategoryIndex = parseInt(Object.keys(subCategories)[subCatLength - 1]) + 1;
+                    let nextSubCategoryIndex;
+
+                    if (subCatLength == 0) {
+                        nextSubCategoryIndex = 0
+                    }else{
+                        nextSubCategoryIndex = parseInt(Object.keys(subCategories)[subCatLength - 1]) + 1;
+                    }
+                    
 
                     set(categoryRef, catName).then(() =>{
 

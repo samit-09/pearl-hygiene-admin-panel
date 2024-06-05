@@ -425,6 +425,7 @@ const productsRef = ref(database, 'products');
 function uploadToDatabase(product_name, product_category, sub_category, product_description, product_code, product_brand, image_urls, product_specifications) {
     get(productsRef).then((snapshot) => {
         const productsData = snapshot.val();
+        
         let nextId = 1;
 
         if (productsData) {
