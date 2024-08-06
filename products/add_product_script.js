@@ -11,7 +11,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 
-let productName, productDescription, productCode, productBrand, productCategory, productSubCategory;
+let productName, productDescription, productCode, productBrand, productCategory, productSubCategory, productCleaningSector;
 
 // Get DOM elements
 const imgPreviewDiv = document.getElementById('imgPreviewDiv');
@@ -26,6 +26,17 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = '../';
     }
 });
+
+tinymce.init({
+    selector: '#product_description',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks linkchecker',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    setup: function (editor) {
+      editor.on('change', function () {
+        tinymce.triggerSave();
+      });
+    }
+  });
 
 // Function to display toast messages
 function showToast(message) {
@@ -66,6 +77,36 @@ function getBrandsFromFirebase() {
         }
     });
 }
+
+
+function getCleaningSectorsFromFirebase() {
+
+    const sectorsRef = ref(database, 'cleaning-sectors');
+
+    get(sectorsRef).then((snapshot) => {
+        const sectorsData = snapshot.val();
+
+        if (sectorsData) {
+            // Get a reference to the select element
+            const selectElement = document.getElementById('cleaning_sector');
+
+            Object.keys(sectorsData).forEach((sectorKey) => {
+                const sectorTitle = sectorKey;
+                const option = document.createElement('option');
+                option.value = sectorTitle;
+                option.textContent = sectorTitle;
+                selectElement.appendChild(option);
+            });
+
+            const defaultOption = document.createElement('option'); 
+            defaultOption.value = "None";
+            defaultOption.textContent = "None";
+            selectElement.appendChild(defaultOption);
+
+        }
+    });
+}
+
 
 function getCategoriesFromFirebase() {
     // Reference to the brand data in Firebase RTDB
@@ -148,11 +189,8 @@ function getCategoriesFromFirebase() {
 }
 
 
-
-
-
-
 getBrandsFromFirebase();
+getCleaningSectorsFromFirebase();
 getCategoriesFromFirebase();
 
 // Asynchronous function to upload image to ImgBB
@@ -298,7 +336,9 @@ async function uploadImage(files) {
             }
         }));
 
-        uploadToDatabase(productName, productCategory, productSubCategory, productDescription, productCode, productBrand, image_urls, specifications);
+        productDescription = tinymce.get('product_description').getContent();
+
+        uploadToDatabase(productName, productCategory,  productSubCategory, productCleaningSector, productDescription, productCode, productBrand, image_urls, specifications);
     } else {
         // Show error message if no file is selected
         toastContainer.style.background = "#b00000";
@@ -358,11 +398,12 @@ uploadButton.addEventListener('click', function () {
     productName = document.getElementById("product_name").value.trim();
     productCategory = document.getElementById("product_category").value.trim();
     productSubCategory = document.getElementById("sub_category").value.trim();
-    productDescription = document.getElementById("product_description").value.trim();
+    productCleaningSector = document.getElementById("cleaning_sector").value.trim();
+    productDescription = tinymce.get('product_description').getContent();
     productCode = document.getElementById("product_code").value.trim();
     productBrand = document.getElementById("product_brand").value.trim();
 
-    if (productName == "" || productCategory == "" || productDescription == "" || productCode == "" || productBrand == "" || specifications.length == 0) {
+    if (productName == "" || productCategory == "" || productCleaningSector == "" ||  productDescription == "" || productCode == "" || productBrand == "" || specifications.length == 0) {
         toastContainer.style.background = "#b00000";
         showToast('Please give all the required information...');
 
@@ -422,7 +463,8 @@ uploadButton.addEventListener('click', function () {
 const productsRef = ref(database, 'products');
 
 // Function to upload image data to database with custom ID
-function uploadToDatabase(product_name, product_category, sub_category, product_description, product_code, product_brand, image_urls, product_specifications) {
+function uploadToDatabase(product_name, product_category, sub_category, cleaning_sector, product_description, product_code, product_brand, image_urls, product_specifications) {
+
     get(productsRef).then((snapshot) => {
         const productsData = snapshot.val();
         
@@ -441,6 +483,7 @@ function uploadToDatabase(product_name, product_category, sub_category, product_
                 productName: product_name,
                 productCategory: product_category,
                 productSubCategory: sub_category,
+                productCleaningSector: cleaning_sector,
                 productDescription: product_description,
                 productCode: product_code,
                 productBrand: product_brand,
@@ -473,6 +516,7 @@ function uploadToDatabase(product_name, product_category, sub_category, product_
             set(newProductRef, {
                 productName: product_name,
                 productCategory: product_category,
+                productCleaningSector: cleaning_sector,
                 productDescription: product_description,
                 productCode: product_code,
                 productBrand: product_brand,

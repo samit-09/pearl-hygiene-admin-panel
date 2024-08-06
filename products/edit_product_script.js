@@ -12,7 +12,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 // Initialize variables to store product data
-let productName, productDescription, productCode, productBrand, productCategory, productSubCategory, image_urls, specifications = [];
+let productName, productDescription, productCode, productBrand, productCategory, productSubCategory, productCleaningSector, image_urls, specifications = [];
 
 let selectedCategory = productCategory;
 
@@ -20,6 +20,7 @@ let selectedCategory = productCategory;
 const productNameInput = document.getElementById("product_name"),
 productCategoryInput = document.getElementById("product_category"),
 productSubCategoryInput = document.getElementById("sub_category"),
+productCleaningSectorInput = document.getElementById("cleaning_sector"),
 productBrandInput = document.getElementById("product_brand"),
 productCodeInput = document.getElementById("product_code"),
 productDescriptionInput = document.getElementById("product_description"),
@@ -27,6 +28,18 @@ imgPreview = document.getElementById("imgPreviewDiv");
 
 // Get the container for displaying toast messages
 const toastContainer = document.getElementById("toastContainer");
+
+
+tinymce.init({
+    selector: '#product_description',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks linkchecker',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    setup: function (editor) {
+      editor.on('change', function () {
+        tinymce.triggerSave();
+      });
+    }
+  });
 
 // Function to display toast messages
 function showToast(message) {
@@ -94,23 +107,16 @@ function getBrandsFromFirebase() {
     }); 
   }
 
-
-  function getCategoriesFromFirebase() {
-    // Reference to the brand data in Firebase RTDB
+function getCategoriesFromFirebase() {
     const categoriesRef = ref(database, 'categories');
 
     get(categoriesRef).then((snapshot) => {
-
         const categoriesData = snapshot.val();
 
-        // Check if there are brands in the database
         if (categoriesData) {
-            // Get a reference to the select element
             const selectElement = document.getElementById('product_category');
-            const subCategorySelectElement = document.getElementById('sub_category');
 
             for (const categoryId in categoriesData) {
-
                 const categoryData = categoriesData[categoryId];
 
                 if (categoryData.subCategories) {
@@ -129,54 +135,59 @@ function getBrandsFromFirebase() {
                     selectElement.appendChild(option);
 
                 }
+
             }
 
-            
-            selectElement.addEventListener('change', (e) => {
-                subCategorySelectElement.innerHTML = ''; // Clear existing options
-
-                const selectedCategoryName = e.target.value; // Get the selected category name
-
-                // Find the category object using the name
-
-                for (const categoryId in categoriesData) {
-                    if (categoriesData[categoryId].name === selectedCategoryName) {
-                        selectedCategory = categoriesData[categoryId];
-                        break; // Exit the loop once found
-                    }
-                }
-
-                if (selectedCategory && selectedCategory.subCategories) {
-                    for (const subCategoryId in selectedCategory.subCategories) {
-                        const subOption = document.createElement('option');
-                        subOption.value = selectedCategory.subCategories[subCategoryId]; // Assuming subCategory IDs are relevant
-                        subOption.textContent = selectedCategory.subCategories[subCategoryId];
-                        subCategorySelectElement.appendChild(subOption);
-                    }
-                }
-
-                  // Add a default option for subcategories if no subcategories exist
-                  const noSubCategoryOption = document.createElement('option');
-                  noSubCategoryOption.value = "";
-                  noSubCategoryOption.textContent = "None";
-                  subCategorySelectElement.appendChild(noSubCategoryOption);
-
-            });
-
-            const defaultOption = document.createElement('option'); // Create an option element
-            defaultOption.value = ""; // Set the value of the option
-            defaultOption.textContent = "None"; // Set the text content of the option
-            defaultOption.selected = true;  
+            const defaultOption = document.createElement('option'); // Create a default option element
+            defaultOption.value = ""; // Set the value of the default option
+            defaultOption.textContent = "None"; // Set the text content of the default option
+            defaultOption.selected = true;
             selectElement.appendChild(defaultOption);
 
+            // Add event listener to fetch subcategories when category changes
+            selectElement.addEventListener('change', (e) => {
+                const selectedCategoryName = e.target.value;
 
+                getSubCategoriesFromFirebase(selectedCategoryName);
+            });
+        }
+    });
+}
+
+
+function getCleaningSectorsFromFirebase() {
+
+    const sectorsRef = ref(database, 'cleaning-sectors');
+
+    get(sectorsRef).then((snapshot) => {
+        const sectorsData = snapshot.val();
+
+        if (sectorsData) {
+            // Get a reference to the select element
+            const selectElement = document.getElementById('cleaning_sector');
+
+            Object.keys(sectorsData).forEach((sectorKey) => {
+                const sectorTitle = sectorKey;
+                const option = document.createElement('option');
+                option.value = sectorTitle;
+                option.textContent = sectorTitle;
+                selectElement.appendChild(option);
+            });
+
+            const defaultOption = document.createElement('option'); 
+            defaultOption.value = "None";
+            defaultOption.textContent = "None";
+            selectElement.appendChild(defaultOption);
 
         }
     });
 }
 
 
+
   getBrandsFromFirebase();
+
+  getCleaningSectorsFromFirebase();
 
 
   function displaySpecifications() {
@@ -386,6 +397,7 @@ function attachDynamicEventListener2(index) {
   let primaryIndex = 0;
 
 // Function to fetch product data by ID
+// Fetch product data by ID
 function getProductById(productId) {
     const productsRef = ref(database, `products/${productId}`);
     get(productsRef)
@@ -398,40 +410,84 @@ function getProductById(productId) {
                 productBrand = product["productBrand"];
                 productCategory = product["productCategory"];
                 productSubCategory = product["productSubCategory"];
+                productCleaningSector = product["productCleaningSector"];
                 productCode = product["productCode"];
                 image_urls = product["images"];
                 specifications = product["specifications"];
-
                 selectedCategory = product["productCategory"];
 
                 displaySpecifications();
                 displayImages();
-            
+
                 // Set form inputs and image preview
-
                 document.title = "Edit - " + productName;
-
                 productNameInput.value = productName;
                 productBrandInput.value = productBrand;
-                productDescriptionInput.value = productDescription;
+                tinymce.get('product_description').setContent(productDescription);
                 productCategoryInput.value = productCategory;
-                productSubCategoryInput.value = productSubCategory;
+                productCleaningSectorInput.value = productCleaningSector;
                 productCodeInput.value = productCode;
 
+                // Fetch and set subcategories
+                getSubCategoriesFromFirebase(productCategory);
+
                 // Show form container and hide loading spinner
-                document.getElementById("upload_product_form_container").style.display = "block"
-                document.getElementById("loading-container").style.display = "none"
+                document.getElementById("upload_product_form_container").style.display = "block";
+                document.getElementById("loading-container").style.display = "none";
             } else {
                 // Display error message if no product found
                 toastContainer.style.background = "#b00000";
                 showToast("No product found with ID: " + productId);
-                document.getElementById("loading-container").style.display = "none"
+                document.getElementById("loading-container").style.display = "none";
             }
         })
         .catch((error) => {
             console.error("Error getting product data:", error);
         });
 }
+
+
+// Function to fetch subcategories from Firebase
+function getSubCategoriesFromFirebase(selectedCategoryName) {
+    const categoriesRef = ref(database, 'categories');
+
+    get(categoriesRef).then((snapshot) => {
+        const categoriesData = snapshot.val();
+        const subCategorySelectElement = document.getElementById('sub_category');
+
+        subCategorySelectElement.innerHTML = '';
+
+        for (const categoryId in categoriesData) {
+            if (categoriesData[categoryId].name === selectedCategoryName) {
+                const selectedCategory = categoriesData[categoryId];
+                subCategorySelectElement.innerHTML = '';
+
+                if (selectedCategory && selectedCategory.subCategories) {
+                    for (const subCategoryId in selectedCategory.subCategories) {
+                        const subOption = document.createElement('option');
+                        subOption.value = selectedCategory.subCategories[subCategoryId]; // Assuming subCategory IDs are relevant
+                        subOption.textContent = selectedCategory.subCategories[subCategoryId];
+                        subCategorySelectElement.appendChild(subOption);
+
+                    }
+                }
+
+                // Set the subcategory value to the product's subcategory
+                subCategorySelectElement.value = productSubCategory;
+                break; // Exit the loop once the category is found and processed
+            }
+        }
+
+         // Add a default option for subcategories if no subcategories exist
+         const noSubCategoryOption = document.createElement('option');
+         noSubCategoryOption.value = "";
+         noSubCategoryOption.textContent = "None";
+         subCategorySelectElement.appendChild(noSubCategoryOption);
+
+    });
+}
+
+
 
 // Fetch product data by ID
 getCategoriesFromFirebase();
@@ -469,9 +525,10 @@ doneButton.addEventListener("click", function () {
     const newProductName = productNameInput.value;
     const new_product_category = productCategoryInput.value;
     const new_product_sub_category = productSubCategoryInput.value;
+    const new_product_cleaning_sector = productCleaningSectorInput.value;
     const new_product_code = productCodeInput.value;
     const newProductBrand = productBrandInput.value;
-    const new_product_description = productDescriptionInput.value;
+    const new_product_description = tinymce.get('product_description').getContent();
     const new_specifications = specifications;
     const new_images = image_urls;
     // Construct updated data object
@@ -481,6 +538,7 @@ doneButton.addEventListener("click", function () {
         productBrand: newProductBrand,
         productCategory: new_product_category,
         productSubCategory: new_product_sub_category,
+        productCleaningSector: new_product_cleaning_sector,
         productCode: new_product_code,
         productDescription: new_product_description,
         specifications: new_specifications,

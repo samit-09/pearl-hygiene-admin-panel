@@ -38,7 +38,19 @@ bottomButton.addEventListener("click", function name() {
 
     window.location.href = "#pageBottom"
 
-})
+});
+
+
+const addProductButton = document.getElementById("addProductButton");
+
+// Add event listener to "Add product" button
+
+addProductButton.addEventListener("click", function () {
+
+    window.location.href = 'add_product.html';
+
+});
+
 
 const productsRef = ref(database, 'products');
 
@@ -62,6 +74,7 @@ function displayproducts() {
             // Loop through each product and display the information in the products table
 
             for (const productId in productsData) {
+                
                 const productData = productsData[productId];
 
                 // Create a table row for each product
@@ -228,17 +241,6 @@ function deleteproduct(productId) {
 displayproducts();
 
 
-
-const addProductButton = document.getElementById("addProductButton");
-
-// Add event listener to "Add product" button
-
-addProductButton.addEventListener("click", function () {
-
-    window.location.href = 'add_product.html';
-
-});
-
 /* 
 
 
@@ -376,14 +378,6 @@ function deleteItemById(id) {
 
     }
 }
-
-
-
-
-
-
-
-
 
 
 

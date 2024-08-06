@@ -1,0 +1,369 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* Global styling */
+* {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+body {
+    padding: 0 0 20px 0;
+    margin: 0;
+}
+
+/* Navbar styles */
+#navbar {
+    background: #fafafa;
+    color: #5b1616;
+    box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    margin-left: 250px;
+    /* Adjusted for sidebar width */
+    overflow-x: auto;
+    /* Enable horizontal scrolling if needed */
+}
+
+/* Container styles */
+.container {
+    max-width: 90%;
+    margin: auto;
+    padding: 20px 40px 20px 25px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px 5px rgba(73, 0, 0, 0.184);
+    overflow-x: auto;
+    /* Enable horizontal scrolling if needed */
+}
+
+/* Button styles */
+#update-button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #490f0d;
+    color: white;
+    font-size: 18px;
+    border-radius: 50px;
+    outline: none;
+    border: 2px solid #581412;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+#update-button:active {
+    background: #490f0d;
+}
+
+.cleaning-sector-item{
+    border: 2px solid rgb(241, 241, 241);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 5px rgba(168, 168, 168, 0.184);
+}
+
+#cleaning-sectors-data{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    
+}
+
+.cleaning-sector-item img{
+    width: 200px;
+    border-radius: 5px;
+    margin: 10px 5px;
+}
+
+.cleaning-sector-item button img{
+    width: 25px;
+}
+
+.cleaning-sector-item button{
+    background: rgb(246, 246, 246);
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: .2s;
+}
+
+.cleaning-sector-item button:hover {
+    background: rgba(119, 0, 0, 0.275);
+}
+
+/* Form label styles */
+#cleaning_sectors_form label {
+    color: #581412;
+    margin: 0 5px;
+}
+
+#cleaning_sectors_form{
+    margin: 50px 0;
+}
+
+/* Input and select styles */
+#cleaning_sectors_form input,
+#cleaning_sectors_form select {
+    display: block;
+    margin: 15px 0;
+    background: transparent;
+    border: 0;
+    border: 2px solid rgb(177, 177, 177);
+    border-radius: 2px;
+    padding: 6px;
+    width: 100%;
+    color: black;
+    outline: none;
+    font-size: 18px;
+}
+
+#cleaning_sectors_form textarea{
+    display: block;
+    margin: 15px 0;
+    background: transparent;
+    border: 0;
+    border: 2px solid rgb(177, 177, 177);
+    border-radius: 2px;
+    padding: 6px;
+    width: 100%;
+    color: black;
+    outline: none;
+    font-size: 18px;
+    resize: none;
+    height: 180px;
+}
+
+/* Focus styles for inputs and selects */
+#cleaning_sectors_form input:focus,
+#cleaning_sectors_form textarea:focus,
+#cleaning_sectors_form select:focus {
+    background: rgb(243, 243, 243);
+}
+
+/* Sidebar header styles */
+.sidebar-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #490f0d;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* Sidebar menu styles */
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    background: #490f0d;
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-menu li a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    background: #490f0d;
+}
+
+.sidebar-menu li a:hover {
+    background-color: #581717;
+}
+
+/* Main container styles */
+#main-container {
+    margin-left: 250px;
+    /* Adjusted for sidebar width */
+    padding: 20px;
+}
+
+/* Hamburger menu styles */
+.hamburger-menu {
+    cursor: pointer;
+}
+
+#addButton{
+    background: #581412;
+    color: white;
+    outline: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: 1px solid brown;
+    cursor: pointer;
+    transition: .1s;
+    display: none;
+}
+
+#addButton:hover{
+    background: #490f0d;
+}
+
+#add-cleaning-sector-button{
+    text-decoration: none;
+    color: #581412;
+    background: rgb(237, 237, 237);
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+#add-cleaning-sector-button:hover{
+    color: white;
+    background: #581412;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #5b1616;
+    margin: 5px 0;
+    transition: transform 0.3s;
+}
+
+/* Define styles for active state of bars (close icon) */
+.bar.active:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.bar.active:nth-child(2) {
+    opacity: 0;
+}
+
+.bar.active:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    left: -250px;
+    /* Hidden by default */
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    /* Adjust as needed */
+    background-color: #490f0d;
+    color: #fff;
+    padding-top: 60px;
+    transition: left 0.3s ease;
+}
+
+/* Show sidebar when active */
+.sidebar.active {
+    left: 0;
+}
+
+/* Sidebar logout button hover styles */
+#sidebar-logout:hover {
+    background: rgb(209, 0, 0);
+}
+
+/* Active tab styles */
+.active-tab {
+    background: #661414;
+}
+
+
+/* Drop area styles */
+#dropArea {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.highlight {
+    background-color: #f0f0f0;
+}
+
+#dropArea img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Hide file input */
+#fileInput {
+    display: none;
+}
+
+/* Media query for collapsed sidebar on mobile and tablet devices */
+
+@media only screen and (max-width: 799px) {
+    
+#cleaning-sectors-data{
+    grid-template-columns: repeat(1, 1fr);
+}
+
+}
+
+@media only screen and (min-width: 800px) and (max-width: 999px) {
+    
+    #cleaning-sectors-data{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    }
+
+@media only screen and (max-width: 999px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    #cleaning_sectors_form input,
+    #cleaning_sectors_form select {
+        font-size: 14px;
+    }
+
+    #cleaning_sectors_form h2 {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    #cleaning_sectors_form h3 {
+        font-size: 16px;
+        margin: 20px 0;
+    }
+
+    #cleaning_sectors_form button {
+        padding: 5px 10px;
+        font-size: 14px;
+        margin: 3px;
+    }
+
+    #cleaning_sectors_form p {
+        font-size: 12px;
+    }
+}
+
+/* Toast notification container styles */
+#toastContainer {
+    display: none;
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #651515;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+}

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sliders - Pearl Hygiene</title>
+  <title>Cleaning Sectors - Pearl Hygiene</title>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="../images/pearlhygiene.png" type="image/x-icon">
 </head>
@@ -54,37 +54,34 @@
       <img src="../images/loading_spinner.gif" alt="" width="200px">
     </div>
 
-    <!-- Sliders Form -->
-    <div id="sliders_form_container" class="container" style="display: none;">
+    <!-- Cleaning Sectors Form -->
+    <div id="cleaning_sectors_form_container" class="container" style="display: none;">
       
       <div style="padding: 10px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-        <a href="#sliders_form" id="add-slider-button">Add A Slider Product</a>
-        <h1 style="text-align: center;">Sliders</h1>
+        <a href="#cleaning_sectors_form" id="add-cleaning-sector-button">Add Cleaning Sector</a>
+        <h1 style="text-align: center;">Cleaning Sectors</h1>
       </div>
 
-      <div id="sliders-data">
+      <div id="cleaning-sectors-data">
       </div>
 
-      <form id="sliders_form" style="display: none;">
+      <form id="cleaning_sectors_form" style="display: none;">
 
-        <h1 style="text-align: center;">Add Slider Product</h1>
+        <h1 style="text-align: center;">Add Cleaning Sector</h1>
+        
         <div class="form-group">
-          <label for="title">Slider Title</label>
-          <input type="text" id="title" name="title" required placeholder="Title For Slider"><br>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required placeholder="Title"><br>
   </div>
 
-  <div class="form-group">
-    <label for="subtitle">Slider Subtitle</label>
-    <input type="text" id="subtitle" name="subtitle" required placeholder="Subtitle For Slider"><br>
-</div>
 
-<div class="form-group">
-  <label for="id">Product Id</label>
-  <input type="number" id="id" name="id" required placeholder="Product Id"><br>
+  <div class="form-group">
+    <label for="details">Details</label>
+    <textarea id="details" name="details" placeholder="Details"></textarea><br>
 </div>
 
   <div class="form-group">
-      <label for="image">Slider Image</label>
+      <label for="image">Image</label>
       <div id="dropArea">
         <div class="custom-file-upload">
           <label for="fileInput">

@@ -17,7 +17,11 @@ onAuthStateChanged(auth, (user) => {
     if (!user || isLoggedInLocalStorage !== 'true') {
         window.location.href = '../';
     }
+    
 });
+
+
+
 // Function to display toast notifications
 const toastContainer = document.getElementById("toastContainer");
 function showToast(message) {
